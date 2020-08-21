@@ -1,23 +1,23 @@
 <template>
   <div class="Tables">
-    <el-button type="text" @click="InsertOfver(0)">添加</el-button>
+    <el-button type="text" @click="InsertOfver({uid : -1 })">添加</el-button>
     <el-table
-      :data="talbeDATAs"
+      :data="tableData"
       style="width: 100%;margin-bottom: 20px;"
       row-key="id"
-      border
-      default-expand-all
+      :default-expand-all="true"
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
     >
+      <el-table-column prop="id" label="id" sortable></el-table-column>
       <el-table-column prop="date" label="日期" sortable></el-table-column>
       <el-table-column prop="name" label="姓名" sortable></el-table-column>
       <el-table-column prop="address" label="地址"></el-table-column>
       <el-table-column label="操作" width="200">
         <template slot-scope="scope">
           <el-button type="text" size="small">查看</el-button>
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button @click="updateFn(scope.row)" type="text" size="small">编辑</el-button>
           <el-button @click="deleteFn(scope.row)" type="text" size="small">删除</el-button>
-          <el-button @click="InsertOfver(scope.row.id)" type="text" size="small">添加子类</el-button>
+          <el-button @click="InsertOfver(scope.row)" type="text" size="small">添加子类</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -52,8 +52,9 @@ export default {
   name: "Tables",
   data() {
     return {
+      flag: sessionStorage.getItem("flag") || 0,
+      talbeDATAs: JSON.parse(sessionStorage.getItem("tableDATAs")) || [],
       tableData: [],
-      talbeDATAs: [],
       dialogFormVisible: false,
       form: {
         date: "",
@@ -61,43 +62,81 @@ export default {
         address: "",
       },
       uid: null,
-      a: {},
       formLabelWidth: "120px",
     };
   },
   created() {
-    this.a = JSON.parse(JSON.stringify(this.form));
+    // 整治规则
+    this.tableData = this.InseRules(
+      JSON.parse(JSON.stringify(this.talbeDATAs)),
+      -1
+    );
   },
   methods: {
     //删除
     deleteFn(row) {
-    //   console.log(row);
+      this.deleteRecursion(row.id, row.uid);
     },
-    //添加
+    deleteRecursion(id, uid){
+      for(let i = 0; i < this.talbeDATAs.length; i++){
+        console.log(this.talbeDATAs[i].id)
+        if(this.talbeDATAs[i].fss === 1) return ;
+        if(this.talbeDATAs[i].id === id){
+          this.talbeDATAs[i].fss = 1;
+        }
+        if(this.talbeDATAs[i].id === uid){
+          this.deleteRecursion(this.talbeDATAs[i].id, this.talbeDATAs[i].uid);
+        }
+        if(this.talbeDATAs[i].uid === id){
+          this.deleteRecursion(this.talbeDATAs[i].id, this.talbeDATAs[i].uid);
+        }
+      }
+
+    },
+    //编辑
+    updateFn(row) {
+      console.log(row);
+    },
+
+    //添加子类 ， //添加
     InsertOfver(uid) {
       this.uid = uid;
       this.dialogFormVisible = true;
     },
-    InsertFn(a, id = this.randomString()) {
-      let form = JSON.parse(JSON.stringify(this.form));
-      this.form = JSON.parse(JSON.stringify(this.a));
-      form.uid = this.uid || 0;
-      form.id = id;
-      this.tableData.push(form);
-      this.arrangementData();
+    InsertFn() {
+      if (this.uid !== null) {
+        this.form.id = this.flag++;
+        this.form.uid = this.uid.id != undefined ? this.uid.id : -1;
+        this.form.children = [];
+        this.talbeDATAs.push(JSON.parse(JSON.stringify(this.form)));
+      }
+      // 整治规则
+      this.tableData = this.InseRules(
+        JSON.parse(JSON.stringify(this.talbeDATAs)),
+        -1
+      );
+      // 存入session
+      sessionStorage.setItem("tableDATAs", JSON.stringify(this.talbeDATAs));
+      sessionStorage.setItem("flag", this.flag);
       this.dialogFormVisible = false;
     },
-    //最大id
-    randomString() {
-      if (this.tableData.length == 0) return 1;
-      return (
-        this.tableData.sort(function (a, b) {
-          return b.id - a.id;
-        })[0].id + 1
-      );
+    InseRules(tableDate, num) {
+      let data = [];
+      for (let i = 0; i < tableDate.length; i++) {
+        let temp = tableDate[i];
+        if (temp.uid === num) {
+          data.push(temp);
+          // tableDate.splice(i,1);
+          // i--;
+        }
+      }
+      data.forEach((item) => {
+        let a = this.InseRules(this.talbeDATAs, item.id);
+        item.children = a;
+      });
+      return data;
     },
   },
 };
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
