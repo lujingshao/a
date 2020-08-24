@@ -5,7 +5,10 @@ import store from './store'
 import './static/css/react.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+import "echarts/lib/chart/map"; 
+import 'echarts/map/js/china.js'
 
 Vue.config.productionTip = false
 

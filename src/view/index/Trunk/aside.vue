@@ -13,9 +13,9 @@
             <i class="el-icon-location"></i>
             <span>基本功能</span>
           </template>
-          <el-menu-item index="1-1">表格</el-menu-item>
-          <el-menu-item index="1-2">地图</el-menu-item>
-          <el-menu-item index="1-3">图表</el-menu-item>
+          <el-menu-item index="1-1" @click="myRouter('/home/tables')">表格</el-menu-item>
+          <el-menu-item index="1-2" @click="myRouter('/home/maps')">地图</el-menu-item>
+          <el-menu-item index="1-3" @click="myRouter('/home/echars')">图表</el-menu-item>
           <el-submenu index="1-4">
             <template slot="title">三级菜单</template>
             <el-menu-item index="1-4-1">1</el-menu-item>
@@ -38,7 +38,11 @@
 <script>
 export default {
   name: "Aside",
-  methods: {},
+  methods: {
+    myRouter(url){
+      this.$router.push(url);
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>

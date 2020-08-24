@@ -5,7 +5,10 @@ const { default: router } = require("./router");
 
 router.beforeEach((to, from, next) => {
     // console.log(to, from)
-    if( to.path!== '/login' ){
+    if (to.meta.title) {
+        document.title = to.meta.title;
+    }
+    if (to.path !== '/login') {
         if (sessionStorage.getItem("token")) {
             next()
         } else {
