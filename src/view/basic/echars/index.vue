@@ -147,7 +147,7 @@ export default {
               },
               {
                 name: "内蒙古",
-                value: 7,
+                value: 7111,
               },
               {
                 name: "陕西",

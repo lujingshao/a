@@ -54,7 +54,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
             sessionStorage.setItem("token","111111111");
-            this.$router.push("/home")
+            this.$router.push("/")
         } else {
           return false;
         }
