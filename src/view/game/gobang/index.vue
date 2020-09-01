@@ -1,8 +1,15 @@
 <template>
   <div class="gobang">
-    <div class="list" v-for="(item, index) in gobangData" :key="index">
-      <div class="verts" v-for="(v, i) in item" :key="i" @click="dropFn(index,i)">
-        <div :class="[v===true?'black-chess':v===false?'white-chess':'']"></div>
+    <div class="gobanges">
+      <div class="a"></div>
+      <div class="b"></div>
+      <div class="c"></div>
+      <div class="d"></div>
+      <div class="list" v-for="(item, index) in gobangData" :key="index">
+        <div class="verts" v-for="(v, i) in item" :key="i" @click="dropFn(index,i)">
+          <div :class="[v===true?'black-chess':v===false?'white-chess':'']"></div>
+          <i class="el-icon-plus"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -144,20 +151,25 @@ export default {
 .gobang {
   height: 100%;
   width: 100%;
+  box-sizing: border-box;
+}
+.gobanges {
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  position: relative;
 }
 .list {
   width: 600px;
-  margin: 0 auto;
 }
 .verts {
   width: 50px;
   height: 50px;
-  box-sizing: border-box;
-  border: 1px solid gray;
   float: left;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .white-chess {
   width: 40px;
@@ -165,6 +177,8 @@ export default {
   border-radius: 50%;
   background: radial-gradient(10px 10px at 15px 15px, #fff, #e2e2e2);
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 10;
 }
 .black-chess {
   width: 40px;
@@ -172,5 +186,47 @@ export default {
   border-radius: 50%;
   background: radial-gradient(10px 10px at 15px 15px, #fff, #333);
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 10;
+}
+.el-icon-plus {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 65px;
+  font-weight: 100;
+  margin-left: -15px;
+  margin-top: -15px;
+  z-index: 2px;
+}
+.a,
+.b,
+.c,
+.d {
+  position: absolute;
+  background: white;
+  z-index: 5;
+}
+.a,
+.b {
+  width: 600px;
+  height: 24px;
+}
+.c,
+.d {
+  width: 24px;
+  height: 600px;
+}
+.a {
+  top: -1px;
+}
+.b {
+  bottom: -1px;
+}
+.c {
+  left: -1px;
+}
+.d {
+  right: -1px;
 }
 </style>
