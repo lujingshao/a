@@ -29,6 +29,8 @@
             <span>小游戏</span>
           </template>
           <el-menu-item index="2-1" @click="myRouter('/home/greedySnake')">贪吃蛇</el-menu-item>
+          <el-menu-item index="2-2" @click="myRouter('/home/rversi')">黑白棋</el-menu-item>
+          <el-menu-item index="2-2" @click="myRouter('/home/gobang')">五子棋</el-menu-item>
         </el-submenu>
         <el-menu-item index="4">
           <i class="el-icon-setting"></i>
@@ -42,9 +44,9 @@
 export default {
   name: "Aside",
   methods: {
-    myRouter(url){
+    myRouter(url) {
       this.$router.push(url);
-    }
+    },
   },
 };
 </script>

@@ -35,6 +35,20 @@ const routes = [
         meta: {
           title: '贪吃蛇'
         }
+      }, {
+        path: '/home/rversi',
+        name: 'rversi',
+        component: () => import('../view/game/rversi/index'),
+        meta: {
+          title: '黑白棋'
+        },
+      }, {
+        path: '/home/gobang',
+        name: 'gobang',
+        component: () => import('../view/game/gobang/index'),
+        meta: {
+          title: '五子棋'
+        },
       }
     ]
   },
