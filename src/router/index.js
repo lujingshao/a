@@ -57,7 +57,7 @@ const routes = [
     name: 'Login',
     component: () => import('../view/Login/index'),
     meta: {
-      title: '登录'
+      title: '111111g'
     }
   }
 ]
