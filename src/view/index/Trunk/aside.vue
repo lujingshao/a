@@ -18,7 +18,7 @@
           <el-menu-item index="1-3" @click="myRouter('/home/echars')">图表</el-menu-item>
           <el-submenu index="1-4">
             <template slot="title">三级菜单</template>
-            <el-menu-item index="1-4-1">1</el-menu-item>
+            <el-menu-item index="1-4-1" @click="myRouter('/home/splicing')">拼接</el-menu-item>
             <el-menu-item index="1-4-2">2</el-menu-item>
             <el-menu-item index="1-4-3">3</el-menu-item>
           </el-submenu>

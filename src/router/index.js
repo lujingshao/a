@@ -2,6 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../view/index/index'
 
+const original = VueRouter.prototype.push
+
+VueRouter.prototype.push = function push(location) {
+  return original.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,6 +27,13 @@ const routes = [
         meta: {
           title: "表格"
         }
+      }, {
+        path: '/home/splicing',
+        name: 'splicing',
+        component: () => import('../view/game/splicing/index'),
+        meta: {
+          title: '拼接怪物'
+        },
       }, {
         path: '/home/echars',
         name: "echars",
@@ -57,8 +70,18 @@ const routes = [
     name: 'Login',
     component: () => import('../view/Login/index'),
     meta: {
-      title: '111111g'
+      title: '登录'
     }
+  },{
+    path:'/404',
+    name: '404',
+    component: () => import('../view/Login/404'),
+    meta: {
+      title: '页面找不到'
+    }
+  },{
+    path:'*',
+    redirect: '/404'
   }
 ]
 
