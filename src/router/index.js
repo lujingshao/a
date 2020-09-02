@@ -49,14 +49,7 @@ const routes = [
         meta: {
           title: '五子棋'
         },
-      }, {
-        path: '/home/gobang',
-        name: 'gobang',
-        component: () => import('../view/game/gobang/index'),
-        meta: {
-          title: '世界棋'
-        },
-      },
+      }
     ]
   },
   {
