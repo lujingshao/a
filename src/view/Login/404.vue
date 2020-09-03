@@ -1,6 +1,6 @@
 <template>
     <div>
-        当前页面 找不到
+        <a href="#/login">当前页面 找不到, 点击登录页</a>
     </div>
 </template>
 <script>

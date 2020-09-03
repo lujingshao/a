@@ -86,25 +86,6 @@
         <el-button @click="dialogFormVisibleed = false">关 闭</el-button>
       </div>
     </el-dialog>
-
-    <!-- <el-dialog title="查看" :visible.sync="dialogFormVisibleed">
-      <el-row>
-        <el-col :span="5">日期</el-col>
-        <el-col :span="19">{{ form.date }}</el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="5">姓名</el-col>
-        <el-col :span="19">{{ form.name }}</el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="5">地址</el-col>
-        <el-col :span="19">{{ form.address }}</el-col>
-      </el-row>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisibleed = false">取 消</el-button>
-        <el-button type="primary" @click="updateIn">确 定</el-button>
-      </div>
-    </el-dialog> -->
   </div>
 </template>
 <script>

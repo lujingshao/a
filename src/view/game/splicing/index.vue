@@ -136,7 +136,7 @@ export default {
             type: "bar",
             barWidth: "15%",
             data: [150, 232, 201, 154, 190, 330, 410],
-          }, //asdfjklaldsjf1
+          },
           {
             name: "直接访问",
             type: "bar",
