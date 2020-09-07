@@ -1,15 +1,17 @@
 <template>
-    <div class="main">
-        <router-view></router-view>
-    </div>
+  <div class="main">
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </div>
 </template>
 <script>
 export default {
-    name:"Main"
-}
+  name: "Main",
+};
 </script>
 <style lang="scss" scoped>
-    .main{
-        height: 100%;
-    }
+.main {
+  height: 100%;
+}
 </style>

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/view/index/index.vue'
-
+const Home = ()=>import("@/view/index/index.vue")
 const original = VueRouter.prototype.push
 
 VueRouter.prototype.push = function push(location) {
@@ -28,11 +27,32 @@ const routes = [
           title: "表格"
         }
       }, {
+        path: '/home/maps',
+        name: 'maps',
+        component: () => import('../view/basic/maps/index.vue'),
+        meta: {
+          title: '地图'
+        }
+      },{
         path: '/home/splicing',
         name: 'splicing',
         component: () => import('../view/game/splicing/index.vue'),
         meta: {
           title: '拼接怪物'
+        },
+      },,{
+        path: '/home/vuex1',
+        name: 'vuex1',
+        component: () => import('../view/game/myVuex/list.vue'),
+        meta: {
+          title: 'vuex1'
+        },
+      },,{
+        path: '/home/vuex2',
+        name: 'vuex2',
+        component: () => import('../view/game/myVuex/test.vue'),
+        meta: {
+          title: 'vuex2'
         },
       }, {
         path: '/home/echars',
